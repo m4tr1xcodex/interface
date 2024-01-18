@@ -1,0 +1,134 @@
+import React, { useEffect, useState } from "react";
+import { Input, Select, SelectItem, Textarea, Button } from "@nextui-org/react";
+import { estados, microsegmentos } from "@/libs/data";
+import { NewGroupFromFile } from "./new-group-from-file";
+import { openNewBackgroundTab, removeTrailingSlash } from "@/libs/functions";
+
+export const NewGroup = () => {
+  const [url, setUrl] = useState<string>("");
+  const [estado, setEstado] = useState<string | null>(null);
+  const [microsegmento, setMicrosegmento] = useState<string | null>(null);
+  const [descripcion, setDescripcion] = useState<string>("");
+
+  const handleSelectionEstado = (e) => {
+    setEstado(e.target.value);
+  };
+  const handleSelectionMicrosegmento = (e) => {
+    setMicrosegmento(e.target.value);
+  };
+  const handleChangeDescription = (e) => {
+    setDescripcion(e.target.value);
+  }
+  const clear = () => {
+    setUrl("");
+    setEstado("");
+    setMicrosegmento("");
+    setDescripcion("");
+  }
+
+  const save = async (toRun = false) => {
+    if (url) {
+      let body = {
+        url: removeTrailingSlash(url),
+        estado,
+        microsegmento,
+        description: descripcion,
+        started: toRun
+      };
+      await fetch("/api/groups/create", {
+        method: "POST",
+        body: JSON.stringify(body),
+        headers: { "Content-type": "application/json; charset=UTF-8" },
+      })
+        .then((response) => response.json())
+        .then((result) => {
+          if (result?.status == "error") {
+          } else {
+            clear();
+            if (toRun) {
+              const { id } = result;
+              let u = `${removeTrailingSlash(url)}/members?exp_grp=1${
+                estado ? `&estado=${estado.currentKey}` : null
+              }${
+                microsegmento
+                  ? `&microsegmento=${microsegmento.currentKey}`
+                  : null
+              }${`&scrap_id=${id}`}`;
+              openNewBackgroundTab(u);
+            }
+          }
+        })
+        .catch((err) => console.log(err));
+    }
+  };
+
+  return (
+    <div>
+      <h3 className="text-xl font-semibold mb-4">
+        Guardar grupo para futuro scrapping
+      </h3>
+      <div className="flex flex-col gap-5 justify-center w-full">
+        <div className="flex w-full flex-wrap md:flex-nowrap gap-4">
+          <Input
+            isRequired
+            radius="sm"
+            type="email"
+            label="Url del grupo"
+            value={url}
+            placeholder="https://facebook.com/groups/23928273849238"
+            onChange={(e) => setUrl(e.target.value)}
+          />
+        </div>
+        <div className="flex w-full flex-wrap md:flex-nowrap gap-4">
+          <Select
+            label="Estado"
+            placeholder="Selecciona un estado"
+            radius="sm"
+            className="flex-1"
+            selectedKeys={estado ? [estado] : []}
+            onChange={handleSelectionEstado}
+            items={estados}
+          >
+            {(estado) => (
+              <SelectItem key={estado.value}>{estado.value}</SelectItem>
+            )}
+          </Select>
+          <Select
+            label="Microsegmento"
+            placeholder="Selecciona un microsegmento"
+            radius="sm"
+            className="flex-1"
+            selectedKeys={microsegmento ? [microsegmento] : []}
+            onChange={handleSelectionMicrosegmento}
+            items={microsegmentos}
+          >
+            {(microsegmento) => (
+              <SelectItem key={microsegmento.value}>
+                {microsegmento.value}
+              </SelectItem>
+            )}
+          </Select>
+        </div>
+        <div className="w-full">
+          <Textarea
+            label="Descripción"
+            placeholder="Ingresa tu descripción"
+            radius="sm"
+            className="flex-1"
+            value={descripcion}
+            onChange={handleChangeDescription}
+          />
+        </div>
+        <div className="w-full flex justify-end gap-4">
+          <NewGroupFromFile />
+          <Button color="primary" radius="sm" onClick={() => save(true)}>
+            Guardar e iniciar
+          </Button>
+          <Button color="primary" radius="sm" onClick={() => save()}>
+            Guardar
+          </Button>
+        </div>
+      </div>
+    </div>
+  );
+};
