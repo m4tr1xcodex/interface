@@ -54,7 +54,7 @@ export default function SocketHandler(
     });
   });
 
-  const clients = [];
+  const clients:any = [];
   io.on("connection", (socket) => {
     clients.push(socket.id);
     console.log("A user connected", socket.id);

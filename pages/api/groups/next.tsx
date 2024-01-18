@@ -23,7 +23,7 @@ export default async function handler(
             data: { started : true }
         });
         return res.status(200).json(updatedGroup);
-    }catch(err){
+    }catch(err:any){
         console.log(err)
         console.log('keys: ', Object.keys(err));
         console.log('error.errorCode: ', err?.errorCode);

@@ -6,7 +6,7 @@ export default async function habdler(req: NextApiRequest, res: NextApiResponse)
         const groups = await prisma.group.findMany();
 
         return res.json(groups);
-    }catch(err){
+    }catch(err:any){
         console.log(err)
         console.log('keys: ', Object.keys(err));
         console.log('error.errorCode: ', err?.errorCode);

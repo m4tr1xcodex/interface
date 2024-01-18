@@ -66,7 +66,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
           });
         }
         return res.json(getGroup);
-      }catch(err){
+      }catch(err:any){
         console.log(err)
         console.log('keys: ', Object.keys(err));
         console.log('error.errorCode: ', err?.errorCode);
@@ -100,7 +100,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
           status: 'success',
           message: "Updated successfully",
         });
-      }catch(e){
+      }catch(e:any){
         return res.status(500).json({
           status: 'error',
           message: e.message

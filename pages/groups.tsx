@@ -17,7 +17,6 @@ import {
   Link
 } from "@nextui-org/react";
 import { VerticalDots } from "@/components/icons/table/vertical-dots";
-import { Group } from "@prisma/client";
 import { openNewBackgroundTab } from "@/libs/functions";
 import { toast } from "react-nextjs-toast";
 
@@ -32,7 +31,7 @@ interface Group{
 
 const Groups = () => {
   // Define a state variable "items" and a function "setItems" to update the state
-  const [items, setItems] = useState<Array>([]);
+  const [items, setItems] = useState<Group[]>([]);
   const [isLoading, setIsLoading] = useState(true);
 
   // Use the useEffect hook to fetch data from the API endpoint when the component mounts

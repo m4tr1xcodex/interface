@@ -44,7 +44,7 @@ export default async function handler(
       });
       
       return res.status(201).json(group);
-    }catch(err){
+    }catch(err:any){
       console.log(err)
       console.log('keys: ', Object.keys(err));
       console.log('error.errorCode: ', err?.errorCode);

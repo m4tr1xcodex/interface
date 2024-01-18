@@ -13,7 +13,7 @@ export const NewGroupFromFile = () => {
     const {isOpen, onOpen, onOpenChange} = useDisclosure();
     const [data, setData] = useState(null);
 
-    const changeFile = (e) => {
+    const changeFile = (e:any) => {
         console.log(e.target.files[0]);
     }
 

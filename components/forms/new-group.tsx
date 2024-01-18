@@ -4,21 +4,27 @@ import { estados, microsegmentos } from "@/libs/data";
 import { NewGroupFromFile } from "./new-group-from-file";
 import { openNewBackgroundTab, removeTrailingSlash } from "@/libs/functions";
 
+interface NewGroup{
+  currentKey: string
+}
 export const NewGroup = () => {
   const [url, setUrl] = useState<string>("");
-  const [estado, setEstado] = useState<string | null>(null);
-  const [microsegmento, setMicrosegmento] = useState<string | null>(null);
+  const [estado, setEstado] = useState<string>("");
+  const [microsegmento, setMicrosegmento] = useState<string>("");
   const [descripcion, setDescripcion] = useState<string>("");
 
-  const handleSelectionEstado = (e) => {
+  const handleSelectionEstado = (e:any) => {
     setEstado(e.target.value);
   };
-  const handleSelectionMicrosegmento = (e) => {
+  const handleSelectionMicrosegmento = (e:any) => {
     setMicrosegmento(e.target.value);
   };
-  const handleChangeDescription = (e) => {
+  const handleChangeDescription = (e:any) => {
     setDescripcion(e.target.value);
   }
+  useEffect(()=>{
+    console.log(estado, microsegmento);
+  }, [estado, microsegmento]);
   const clear = () => {
     setUrl("");
     setEstado("");
@@ -48,10 +54,10 @@ export const NewGroup = () => {
             if (toRun) {
               const { id } = result;
               let u = `${removeTrailingSlash(url)}/members?exp_grp=1${
-                estado ? `&estado=${estado.currentKey}` : null
+                estado ? `&estado=${estado}` : null
               }${
                 microsegmento
-                  ? `&microsegmento=${microsegmento.currentKey}`
+                  ? `&microsegmento=${microsegmento}`
                   : null
               }${`&scrap_id=${id}`}`;
               openNewBackgroundTab(u);
