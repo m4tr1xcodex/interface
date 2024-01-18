@@ -1,7 +1,7 @@
 import { createContext } from 'react';
 import io from 'socket.io-client';
 
-const s = io('http://localhost:3301', { path: "/api/socket", addTrailingSlash: false }); // Replace with your server URL
+const s = io('https://interface-brown-ten.vercel.app/:3301', { path: "/api/socket", addTrailingSlash: false }); // Replace with your server URL
 export const socket = s;
 export const SocketContext = createContext();
 
