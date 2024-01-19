@@ -1,7 +1,10 @@
-import { createContext } from 'react';
-import io from 'socket.io-client';
+import { createContext } from "react";
+import io from "socket.io-client";
 
-const s = io('https://interface-brown-ten.vercel.app:3301', { path: "/api/socket", addTrailingSlash: false }); // Replace with your server URL
+const s = io("https://interface-production.up.railway.app/:3301", {
+  path: "/api/socket",
+  addTrailingSlash: false,
+}); // Replace with your server URL
 export const socket = s;
 export const SocketContext = createContext();
 
