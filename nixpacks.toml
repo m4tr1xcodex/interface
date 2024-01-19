@@ -1,2 +1,2 @@
 [phase.setup]
-cmd = "npm i --legacy-peer-deps"
+cmds = ["echo NODE_ENV", "npm i --legacy-peer-deps"]
