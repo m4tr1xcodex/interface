@@ -3,9 +3,10 @@ import { Input, Select, SelectItem, Textarea, Button } from "@nextui-org/react";
 import { estados, microsegmentos } from "@/libs/data";
 import { NewGroupFromFile } from "./new-group-from-file";
 import { openNewBackgroundTab, removeTrailingSlash } from "@/libs/functions";
+import toast from "react-hot-toast";
 
-interface NewGroup{
-  currentKey: string
+interface NewGroup {
+  currentKey: string;
 }
 export const NewGroup = () => {
   const [url, setUrl] = useState<string>("");
@@ -13,16 +14,16 @@ export const NewGroup = () => {
   const [microsegmento, setMicrosegmento] = useState<string>("");
   const [descripcion, setDescripcion] = useState<string>("");
 
-  const handleSelectionEstado = (e:any) => {
+  const handleSelectionEstado = (e: any) => {
     setEstado(e.target.value);
   };
-  const handleSelectionMicrosegmento = (e:any) => {
+  const handleSelectionMicrosegmento = (e: any) => {
     setMicrosegmento(e.target.value);
   };
-  const handleChangeDescription = (e:any) => {
+  const handleChangeDescription = (e: any) => {
     setDescripcion(e.target.value);
-  }
-  useEffect(()=>{
+  };
+  useEffect(() => {
     console.log(estado, microsegmento);
   }, [estado, microsegmento]);
   const clear = () => {
@@ -30,7 +31,7 @@ export const NewGroup = () => {
     setEstado("");
     setMicrosegmento("");
     setDescripcion("");
-  }
+  };
 
   const save = async (toRun = false) => {
     if (url) {
@@ -39,7 +40,7 @@ export const NewGroup = () => {
         estado,
         microsegmento,
         description: descripcion,
-        started: toRun
+        started: toRun,
       };
       await fetch("/api/groups/create", {
         method: "POST",
@@ -51,20 +52,26 @@ export const NewGroup = () => {
           if (result?.status == "error") {
           } else {
             clear();
+            toast.success("Grupo guardado correctamente");
             if (toRun) {
               const { id } = result;
               let u = `${removeTrailingSlash(url)}/members?exp_grp=1${
                 estado ? `&estado=${estado}` : null
               }${
-                microsegmento
-                  ? `&microsegmento=${microsegmento}`
-                  : null
+                microsegmento ? `&microsegmento=${microsegmento}` : null
               }${`&scrap_id=${id}`}`;
-              openNewBackgroundTab(u);
+              let loadingToast = toast.loading("Iniciando...");
+              setTimeout(() => {
+                openNewBackgroundTab(u);
+                toast.dismiss(loadingToast);
+              }, 4e3);
             }
           }
         })
-        .catch((err) => console.log(err));
+        .catch((err) => {
+          console.log(err);
+          toast.error("Error al guardar el grupo");
+        });
     }
   };
 

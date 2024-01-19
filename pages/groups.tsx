@@ -36,15 +36,22 @@ const Groups = () => {
 
   // Use the useEffect hook to fetch data from the API endpoint when the component mounts
   useEffect(() => {
-    fetch("/api/groups/all", {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-      },
-    })
+    toast
+      .promise(
+        fetch("/api/groups/all", {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }),
+        {
+          loading: "Cargando grupos...",
+          success: "Grupos cargados correctamente",
+          error: "Error al obtener los grupos",
+        }
+      )
       .then((res) => res.json())
       .then((data) => {
-        toast("Grupos cargados correctamente");
         setItems(data);
         setIsLoading(false);
       });
