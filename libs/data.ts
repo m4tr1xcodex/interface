@@ -1,11 +1,59 @@
-export const estados =  [
-    {
-        value: "Jaliscot"
-    }
-]
+export const estados = {
+    "Aguascalientes": "Aguascalientes",
+    "Baja California": "Baja California",
+    "California Sur": "California Sur",
+    "Campeche": "Campeche",
+    "Chiapas": "Chiapas",
+    "Chihuahua": "Chihuahua",
+    "Coahuila": "Coahuila",
+    "Colima": "Colima",
+    "Distrito Federal": "Distrito Federal",
+    "Durango": "Durango",
+    "Guanajuato": "Guanajuato",
+    "Guerrero": "Guerrero",
+    "Hidalgo": "Hidalgo",
+    "Jalisco": "Jalisco",
+    "México": "México",
+    "Michoacán": "Michoacán",
+    "Morelos": "Morelos",
+    "Nayarit": "Nayarit",
+    "Nuevo León": "Nuevo León",
+    "Oaxaca": "Oaxaca",
+    "Puebla": "Puebla",
+    "Querétaro": "Querétaro",
+    "Quintana Roo": "Quintana Roo",
+    "Luis Potosí": "Luis Potosí",
+    "Sinaloa": "Sinaloa",
+    "Sonora": "Sonora",
+    "Tabasco": "Tabasco",
+    "Tamaulipas": "Tamaulipas",
+    "Tlaxcala": "Tlaxcala",
+    "Veracruz": "Veracruz",
+    "Yucatán": "Yucatán",
+    "Zacatecas": "Zacatecas",
+}
 
-export const microsegmentos = [
-    {
-        value: "3a Edad"
-    }
-]
+export const microsegmentos = {
+    "INDIGENISTAS": "INDIGENISTAS",
+    "PET FRIENDLY": "PET FRIENDLY",
+    "AMBIENTALISTAS": "AMBIENTALISTAS",
+    "MILLENIALS": "MILLENIALS",
+    "DERECHOS HUMANOS": "DERECHOS HUMANOS",
+    "ESTUDIANTES": "ESTUDIANTES",
+    "ARTISTAS": "ARTISTAS",
+    "AGRICULTORES": "AGRICULTORES",
+    "DEPORTE": "DEPORTE",
+    "MADRES": "MADRES",
+    "LGTB": "LGTB",
+    "RELIGIOSOS": "RELIGIOSOS",
+    "CICLISTAS": "CICLISTAS",
+    "DISCAPACITADOS": "DISCAPACITADOS",
+    "EMPRESARIOS": "EMPRESARIOS",
+    "3a EDAD": "3a EDAD",
+    "GEEKS": "GEEKS",
+    "VENDEDORES": "VENDEDORES",
+    "MÉDICOS": "MÉDICOS",
+    "PROFESORES": "PROFESORES",
+    "FEMINISTAS": "FEMINISTAS",
+    "OTROS": "OTROS"
+}
