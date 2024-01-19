@@ -6,9 +6,13 @@ import { NextUIProvider } from "@nextui-org/react";
 import { Layout } from "../components/layout/layout";
 import { openNewBackgroundTab } from "@/libs/functions";
 import { useEffect } from "react";
+import { Toaster } from "react-hot-toast";
 
 function MyApp({ Component, pageProps }: AppProps) {
-  const getNextGroup = () => {
+  const getNextGroup = (ends = false) => {
+    console.log(ends);
+
+    if (!ends) return;
     fetch("/api/groups/next")
       .then((res) => res.json())
       .then((data) => {
@@ -30,7 +34,7 @@ function MyApp({ Component, pageProps }: AppProps) {
   };
 
   useEffect(() => {
-    socket.on("scrap-next", getNextGroup);
+    socket.on("scrap-next", () => getNextGroup(true));
     return () => {
       socket.off("scrap-next", getNextGroup);
     };
@@ -43,6 +47,7 @@ function MyApp({ Component, pageProps }: AppProps) {
             <Component {...pageProps} />
           </Layout>
         </SocketContext.Provider>
+        <Toaster position="bottom-right" />
       </NextUIProvider>
     </NextThemesProvider>
   );

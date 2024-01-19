@@ -18,6 +18,7 @@ import {
 } from "@nextui-org/react";
 import { VerticalDots } from "@/components/icons/table/vertical-dots";
 import { openNewBackgroundTab } from "@/libs/functions";
+import toast from "react-hot-toast";
 
 interface Group {
   id: number;
@@ -43,14 +44,12 @@ const Groups = () => {
     })
       .then((res) => res.json())
       .then((data) => {
+        toast("Grupos cargados correctamente");
         setItems(data);
         setIsLoading(false);
       });
+    return () => {};
   }, []);
-
-  useEffect(() => {
-    console.log(items);
-  }, [items]);
 
   const startScrapingGroup = async (item: Group, index: number) => {
     await fetch(`/api/groups/${item.id}`, {
