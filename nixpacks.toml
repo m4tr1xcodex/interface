@@ -1,2 +1,2 @@
-[phase.install]
+[phase.setup]
 cmd = "npm i --legacy-peer-deps"
