@@ -9,7 +9,6 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@next-auth/prisma-adapter": "^0.4.4-canary.81",
     "@nextui-org/react": "^2.2.9",
     "@prisma/client": "^5.8.1",
     "apexcharts": "^3.35.5",
