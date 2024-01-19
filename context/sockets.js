@@ -1,10 +1,7 @@
 import { createContext } from "react";
 import io from "socket.io-client";
 
-const s = io("websockets-server-production-db48.up.railway.app:3301", {
-  path: "/api/socket",
-  addTrailingSlash: false,
-}); // Replace with your server URL
+const s = io("websockets-server-production-db48.up.railway.app"); // Replace with your server URL
 export const socket = s;
 export const SocketContext = createContext();
 
