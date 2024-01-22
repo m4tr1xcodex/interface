@@ -17,15 +17,19 @@ export const NewGroup = () => {
   const handleSelectionEstado = (e: any) => {
     setEstado(e.target.value);
   };
+
   const handleSelectionMicrosegmento = (e: any) => {
     setMicrosegmento(e.target.value);
   };
+
   const handleChangeDescription = (e: any) => {
     setDescripcion(e.target.value);
   };
+
   useEffect(() => {
     console.log(estado, microsegmento);
   }, [estado, microsegmento]);
+
   const clear = () => {
     setUrl("");
     setEstado("");
@@ -50,6 +54,7 @@ export const NewGroup = () => {
         .then((response) => response.json())
         .then((result) => {
           if (result?.status == "error") {
+            if (result?.message) toast.error(result.message);
           } else {
             clear();
             toast.success("Grupo guardado correctamente");
@@ -72,6 +77,16 @@ export const NewGroup = () => {
           console.log(err);
           toast.error("Error al guardar el grupo");
         });
+    } else {
+      toast.custom(
+        <>
+          <div className="px-4 py-2 bg-sky-600 rounded-md shadow shadow-black dark:shadow-white">
+            <span className="text-white">
+              Ingresa una url de grupos correctamente
+            </span>
+          </div>
+        </>
+      );
     }
   };
 
