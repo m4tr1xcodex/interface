@@ -7,7 +7,8 @@ import { SearchIcon } from "../icons/searchicon";
 import { BurguerButton } from "./burguer-button";
 import { NotificationsDropdown } from "./notifications-dropdown";
 import { UserDropdown } from "./user-dropdown";
-import { ListIcon } from "../icons/listicon";
+import { ListIcon } from "@/components/icons/listicon";
+import { HouseIcon } from "@/components/icons/breadcrumb/house-icon";
 
 interface Props {
   children: React.ReactNode;
@@ -28,12 +29,13 @@ export const NavbarWrapper = ({ children }: Props) => {
         </NavbarContent>
         <NavbarContent className="w-full">
           <Link href="/groups" className="flex items-center gap-2">
+            <HouseIcon />
             <span>Inicio</span>
           </Link>
-          <Link href="/groups" className="flex items-center gap-2">
+          {/*<Link href="/groups" className="flex items-center gap-2">
             <ListIcon />
             <span>Grupos</span>
-          </Link>
+          </Link>*/}
         </NavbarContent>
         <NavbarContent
           justify="end"
