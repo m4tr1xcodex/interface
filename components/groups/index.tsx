@@ -58,7 +58,44 @@ const Groups = () => {
     return () => {};
   }, []);
 
+  const markAsCompleted = (item: Group, index: number) => {
+    items.splice(index, 1);
+    //setIsLoading(true);
+    toast
+      .promise(
+        fetch(`/api/groups/${item.id}`, {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            id: item.id,
+            finished: true,
+          }),
+        }),
+        {
+          loading: "Actualizando...",
+          success: "Grupo actualizado correctamente",
+          error: "Error al actualizar los grupos",
+        }
+      )
+      .then((res) => res.json())
+      .then((data) => {
+        setItems([
+          ...items,
+          {
+            ...{
+              ...item,
+              started: true,
+            },
+          },
+        ]);
+        setIsLoading(false);
+      });
+  };
+
   const startScrapingGroup = async (item: Group, index: number) => {
+    items.splice(index, 1);
     await fetch(`/api/groups/${item.id}`, {
       method: "PUT",
       headers: { "Content-type": "application/json; charset=UTF-8" },
@@ -68,7 +105,6 @@ const Groups = () => {
     })
       .then((response) => response.json())
       .then((data) => {
-        let spliceItems = items.splice(index, 1);
         setItems([
           ...items,
           {
@@ -148,7 +184,12 @@ const Groups = () => {
                         >
                           Iniciar
                         </DropdownItem>
-                        <DropdownItem>Editar</DropdownItem>
+                        <DropdownItem
+                          isDisabled={item.finished}
+                          onClick={() => markAsCompleted(item, index)}
+                        >
+                          Marcar como terminado
+                        </DropdownItem>
                         <DropdownItem>Eliminar</DropdownItem>
                       </DropdownMenu>
                     </Dropdown>

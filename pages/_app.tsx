@@ -21,12 +21,14 @@ function MyApp({ Component, pageProps }: AppProps) {
         } else {
           setTimeout(() => {
             const { id, url, estado, microsegmento } = data;
-            let u = `${url}/members?exp_grp=1${
-              estado ? `&estado=${estado}` : null
-            }${
-              microsegmento ? `&microsegmento=${microsegmento}` : null
-            }${`&scrap_id=${id}`}`;
-            openNewBackgroundTab(u);
+            if (url) {
+              let u = `${url}/members?exp_grp=1${
+                estado ? `&estado=${estado}` : null
+              }${
+                microsegmento ? `&microsegmento=${microsegmento}` : null
+              }${`&scrap_id=${id}`}`;
+              openNewBackgroundTab(u);
+            }
           }, 2e3);
         }
       })
