@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Input, Select, SelectItem, Textarea, Button } from "@nextui-org/react";
 import { estados, microsegmentos } from "@/libs/data";
-import { NewGroupFromFile } from "./new-group-from-file";
+import { NewGroupFromFile } from "../forms/new-group-from-file";
 import { openNewBackgroundTab, removeTrailingSlash } from "@/libs/functions";
 import toast from "react-hot-toast";
 

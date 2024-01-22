@@ -28,6 +28,9 @@ export const NavbarWrapper = ({ children }: Props) => {
         </NavbarContent>
         <NavbarContent className="w-full">
           <Link href="/groups" className="flex items-center gap-2">
+            <span>Inicio</span>
+          </Link>
+          <Link href="/groups" className="flex items-center gap-2">
             <ListIcon />
             <span>Grupos</span>
           </Link>

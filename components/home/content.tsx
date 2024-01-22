@@ -8,7 +8,8 @@ import { CardAgents } from "./card-agents";
 import { CardTransactions } from "./card-transactions";
 import { Link } from "@nextui-org/react";
 import NextLink from "next/link";
-import {NewGroup} from '@/components/forms/new-group';
+import { NewGroup } from "@/components/groups/new-group";
+import Groups from "@/pages/groups";
 
 const Chart = dynamic(
   () => import("../charts/steam").then((mod) => mod.Steam),
@@ -18,7 +19,9 @@ const Chart = dynamic(
 );
 
 export const Content = () => {
-  return <>
-    <NewGroup />
-  </>
-}
+  return (
+    <>
+      <Groups />
+    </>
+  );
+};

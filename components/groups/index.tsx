@@ -93,7 +93,7 @@ const Groups = () => {
         <Link
           className="bg-blue-600 rounded-lg px-2 py-0 text-white"
           size="sm"
-          href="/"
+          href="/groups/new"
         >
           Agregar nuevo grupo
         </Link>
